@@ -1,48 +1,339 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Name | Portfolio</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Akash Kumar Rai | Portfolio</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-<header class="hero">
-  <h1>Hi, I'm <span>Akash Kumar Rai</span></h1>
-  <p id="typing"></p>
-  <a href="#projects" class="btn">View Projects</a>
-</header>
+  <!-- ── LOADER ─────────────────────────────────────────── -->
+  <div id="loader">
+    <div class="loader-ring"></div>
+    <p class="loader-text">Initialising<span class="dots"></span></p>
+  </div>
 
-<section id="about" class="fade-in">
-  <h2>About Me</h2>
-  <p>I am a B.Tech Computer Science student at LPU (Batch 2027), interested in Android App Development and Data Science. I enjoy building real-world projects and learning new technologies.</p>
-</section>
+  <!-- ── CURSOR ─────────────────────────────────────────── -->
+  <div id="cursor"></div>
+  <div id="cursor-follower"></div>
 
-<section id="skills" class="fade-in">
-  <h2>Skills</h2>
-  <ul class="skills-list">
-    <li>Java</li>
-    <li>Android (Firebase)</li>
-    <li>Python</li>
-    <li>C / C++</li>
-    <li>HTML, CSS</li>
-    <li>Git & GitHub</li>
-  </ul>
-</section>
+  <!-- ── PARTICLES ──────────────────────────────────────── -->
+  <canvas id="particles-canvas"></canvas>
 
-<section id="projects" class="fade-in">
-  <h2>Projects</h2>
-  <div id="project-container"></div>
-</section>
+  <!-- ── NAVBAR ─────────────────────────────────────────── -->
+  <nav id="navbar">
+    <div class="nav-logo">
+      <span class="logo-bracket">&lt;</span>AKR
+      <span class="logo-bracket">/&gt;</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#hero"     data-section="hero">Home</a></li>
+      <li><a href="#about"    data-section="about">About</a></li>
+      <li><a href="#skills"   data-section="skills">Skills</a></li>
+      <li><a href="#projects" data-section="projects">Projects</a></li>
+      <li><a href="#timeline" data-section="timeline">Journey</a></li>
+      <li><a href="#contact"  data-section="contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-sun" id="theme-icon"></i>
+      </button>
+      <a href="resume.pdf" download class="btn btn-sm">
+        <i class="fas fa-download"></i> Resume
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
 
-<section id="contact" class="fade-in">
-  <h2>Contact</h2>
-  <p>Email: akashrai94660@gmail.com</p>
-  <p><a href="https://github.com/akashrairai">GitHub: github.com/akashrairai</a></p>
-  <p><a href="https://linkedin.com/in/akashrairai">LinkedIn: linkedin.com/in/akashrairai</a></p>
-</section>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#hero"     onclick="closeMobileMenu()">Home</a>
+    <a href="#about"    onclick="closeMobileMenu()">About</a>
+    <a href="#skills"   onclick="closeMobileMenu()">Skills</a>
+    <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+    <a href="#timeline" onclick="closeMobileMenu()">Journey</a>
+    <a href="#contact"  onclick="closeMobileMenu()">Contact</a>
+  </div>
 
-<script src="script.js"></script>
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-content">
+      <p class="hero-greeting">
+        <span class="wave">👋</span> Hello World, I'm
+      </p>
+      <h1 class="hero-name">
+        <span class="glitch" data-text="Akash Kumar Rai">Akash Kumar Rai</span>
+      </h1>
+      <div class="hero-roles">
+        <span class="role-prefix">I build&nbsp;</span>
+        <span id="typed-role"></span><span class="cursor-blink">|</span>
+      </div>
+      <p class="hero-subtitle">
+        B.Tech CSE @ LPU '27 · Android Dev · Data Science Enthusiast
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">
+          <i class="fas fa-rocket"></i> View Projects
+        </a>
+        <a href="#contact" class="btn btn-outline">
+          <i class="fas fa-paper-plane"></i> Hire Me
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num" data-target="5">0</span>+
+          <span class="stat-label">Projects</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-target="3">0</span>+
+          <span class="stat-label">Technologies</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+          <span class="stat-num" data-target="2">0</span>
+          <span class="stat-label">Years Coding</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="code-card">
+        <div class="code-card-header">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+          <span class="code-card-title">akash.java</span>
+        </div>
+        <pre class="code-card-body"><code id="code-animation"></code></pre>
+      </div>
+      <div class="floating-badge badge-1">
+        <i class="fab fa-android"></i> Android Dev
+      </div>
+      <div class="floating-badge badge-2">
+        <i class="fas fa-brain"></i> Data Science
+      </div>
+      <div class="floating-badge badge-3">
+        <i class="fas fa-fire"></i> Firebase
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll Down</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ──────────────────────────────────────────── -->
+  <section id="about" class="reveal">
+    <div class="section-header">
+      <span class="section-tag">// who am I?</span>
+      <h2>About <span class="highlight">Me</span></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-avatar-wrap">
+
+  <!-- Outer glowing ring -->
+  <div class="avatar-ring">
+
+    <!-- ✅ YOUR PHOTO GOES HERE -->
+    <!-- Replace "your-photo.jpg" with your actual image file name -->
+    <div class="avatar-inner">
+      <img
+        src="your-photo.jpg"
+        alt="Akash Kumar Rai"
+        class="avatar-photo"
+        onerror="this.style.display='none';
+                 document.querySelector('.avatar-fallback').style.display='flex';"
+      />
+      <!-- Fallback icon shown if image fails to load -->
+      <div class="avatar-fallback">
+        <i class="fas fa-user fa-4x"></i>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Decorative status badge -->
+  <div class="avatar-status">
+    <span class="status-pulse"></span>
+    Available for Internship
+  </div>
+
+  <!-- Orbiting tech icons -->
+  <div class="avatar-orbit orbit-1">
+    <span><i class="fab fa-java"></i></span>
+  </div>
+  <div class="avatar-orbit orbit-2">
+    <span><i class="fab fa-python"></i></span>
+  </div>
+  <div class="avatar-orbit orbit-3">
+    <span><i class="fab fa-android"></i></span>
+  </div>
+
+</div>
+      <div class="about-text">
+        <p>
+          I'm a passionate <strong>Computer Science student</strong> at
+          Lovely Professional University (Batch 2027), diving deep into
+          <strong>Android App Development</strong> and
+          <strong>Data Science</strong>.
+        </p>
+        <p>
+          I love turning ideas into real-world applications — from crafting
+          seamless mobile experiences with <strong>Firebase</strong> to
+          analysing data with <strong>Python</strong>. Every project is a
+          new challenge and I embrace it with curiosity.
+        </p>
+        <p>
+          When I'm not coding, I'm exploring open-source, tinkering with
+          algorithms, or levelling up on competitive programming.
+        </p>
+        <div class="about-pills">
+          <span class="pill"><i class="fas fa-graduation-cap"></i> LPU · B.Tech CSE</span>
+          <span class="pill"><i class="fas fa-map-marker-alt"></i> India</span>
+          <span class="pill"><i class="fas fa-circle status-dot"></i> Open to Internships</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SKILLS ─────────────────────────────────────────── -->
+  <section id="skills" class="reveal">
+    <div class="section-header">
+      <span class="section-tag">// what I use</span>
+      <h2>Tech <span class="highlight">Stack</span></h2>
+    </div>
+
+    <div class="skills-tabs">
+      <button class="tab-btn active" data-tab="all">All</button>
+      <button class="tab-btn" data-tab="languages">Languages</button>
+      <button class="tab-btn" data-tab="tools">Tools & Frameworks</button>
+    </div>
+
+    <div class="skills-grid" id="skills-grid"></div>
+
+    <div class="proficiency-bars" id="proficiency-bars"></div>
+  </section>
+
+  <!-- ── PROJECTS ───────────────────────────────────────── -->
+  <section id="projects" class="reveal">
+    <div class="section-header">
+      <span class="section-tag">// what I've built</span>
+      <h2>Featured <span class="highlight">Projects</span></h2>
+    </div>
+
+    <div class="project-filter">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="android">Android</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="python">Python</button>
+    </div>
+
+    <div class="projects-grid" id="projects-grid"></div>
+  </section>
+
+  <!-- ── TIMELINE ───────────────────────────────────────── -->
+  <section id="timeline" class="reveal">
+    <div class="section-header">
+      <span class="section-tag">// my journey</span>
+      <h2>Learning <span class="highlight">Timeline</span></h2>
+    </div>
+    <div class="timeline" id="timeline-container"></div>
+  </section>
+
+  <!-- ── CONTACT ────────────────────────────────────────── -->
+  <section id="contact" class="reveal">
+    <div class="section-header">
+      <span class="section-tag">// let's connect</span>
+      <h2>Get In <span class="highlight">Touch</span></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p class="contact-intro">
+          I'm currently looking for <strong>internship opportunities</strong>
+          and exciting projects. Whether you have a question or just want to
+          say hi — my inbox is always open!
+        </p>
+        <div class="contact-links">
+          <a href="mailto:akashrai94660@gmail.com" class="contact-card">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <span class="c-label">Email</span>
+              <span class="c-value">akashrai94660@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://github.com/akashrairai"
+             target="_blank" class="contact-card">
+            <i class="fab fa-github"></i>
+            <div>
+              <span class="c-label">GitHub</span>
+              <span class="c-value">github.com/akashrairai</span>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/akashrairai"
+             target="_blank" class="contact-card">
+            <i class="fab fa-linkedin"></i>
+            <div>
+              <span class="c-label">LinkedIn</span>
+              <span class="c-value">linkedin.com/in/akashrairai</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="cf-name">Your Name</label>
+          <input type="text" id="cf-name" placeholder="John Doe" required/>
+          <span class="form-error" id="err-name"></span>
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email Address</label>
+          <input type="email" id="cf-email" placeholder="john@example.com" required/>
+          <span class="form-error" id="err-email"></span>
+        </div>
+        <div class="form-group">
+          <label for="cf-subject">Subject</label>
+          <input type="text" id="cf-subject" placeholder="Let's collaborate!"/>
+        </div>
+        <div class="form-group">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" rows="5"
+            placeholder="Tell me about your project..." required></textarea>
+          <span class="form-error" id="err-msg"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" id="submit-btn">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+        <div class="form-success" id="form-success">
+          <i class="fas fa-check-circle"></i> Message sent! I'll reply soon 🚀
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer>
+    <p>
+      Designed & Built by
+      <strong>Akash Kumar Rai</strong>
+      <span id="footer-year"></span>
+    </p>
+    <p class="footer-sub">
+      Made with <span class="heart">❤️</span> and lots of ☕
+    </p>
+  </footer>
+
+  <!-- ── BACK TO TOP ────────────────────────────────────── -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="script.js"></script>
 </body>
 </html>
