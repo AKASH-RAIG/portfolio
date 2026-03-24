@@ -19,7 +19,7 @@ const SKILLS = [
 const PROJECTS = [
   {
     title:"CareBridge — Firebase",
-    desc:"Real-time Android chat app with Firebase Auth, Firestore & push notifications. Supports media sharing and contact with doctor with sos button",
+    desc:"Real-time Android healthcare app with Firebase Auth, Firestore & push notifications. Supports media sharing, doctor contact and SOS button.",
     icon:"fab fa-android",
     tags:["Java","Firebase","Android"],
     cat:"android",
@@ -28,15 +28,14 @@ const PROJECTS = [
     featured:true
   },
   {
-  title: "Loan Approval Prediction",
-  desc: "Machine learning model achieving 88.7% accuracy...",
-  icon: "fas fa-brain",
-  tags: ["Python", "Scikit-learn", "Matplotlib"],
-  cat: "python",
-  github:"https://github.com/akashrairai",
-  demo:"",
-  featured:false
-
+    title:"Loan Approval Prediction",
+    desc:"Machine learning model achieving 88.7% accuracy using Scikit-learn with data visualisation via Matplotlib.",
+    icon:"fas fa-brain",
+    tags:["Python","Scikit-learn","Matplotlib"],
+    cat:"python",
+    github:"https://github.com/akashrairai",
+    demo:"",
+    featured:false
   },
   {
     title:"Portfolio Website",
@@ -59,13 +58,14 @@ const PROJECTS = [
     featured:false
   },
   {
-  title: "Power BI Dashboard",
-  desc: "Interactive dashboard analyzing MSME loan data...",
-  icon: "fas fa-chart-line",
-  tags: ["Power BI", "DAX", "Excel"],
-  cat: "data",
-  demo:"",
-  featured:false
+    title:"Power BI Dashboard",
+    desc:"Interactive dashboard analysing MSME loan data with DAX formulas and Excel integration.",
+    icon:"fas fa-chart-line",
+    tags:["Power BI","DAX","Excel"],
+    cat:"data",
+    github:"",
+    demo:"",
+    featured:false
   },
   {
     title:"ML Spam Detector",
@@ -79,36 +79,54 @@ const PROJECTS = [
   },
 ];
 
-const TIMELINE = [
+const CERTIFICATES = [
   {
-    date:"2020",
-    title:"First Lines of Code",
-    sub:"Wrote first C program — the classic Hello World. Caught the programming bug instantly."
+    title:  "Android App Development",
+    issuer: "Google / Coursera",
+    date:   "Jan 2024",
+    cat:    "android",
+    badge:  "Android",
+    img:    "certs/android.jpg",
   },
   {
-    date:"2021",
-    title:"Discovered Java",
-    sub:"Learned OOP fundamentals with Java and built console-based mini projects."
+    title:  "Python for Data Science",
+    issuer: "IBM / Coursera",
+    date:   "Mar 2024",
+    cat:    "python",
+    badge:  "Python",
+    img:    "certs/python.jpg",
   },
   {
-    date:"2022",
-    title:"Joined LPU · B.Tech CSE",
-    sub:"Started my Computer Science degree at Lovely Professional University."
+    title:  "Machine Learning Fundamentals",
+    issuer: "Stanford / Coursera",
+    date:   "May 2024",
+    cat:    "ml",
+    badge:  "ML / AI",
+    img:    "certs/ml.jpg",
   },
   {
-    date:"2023",
-    title:"Android Development",
-    sub:"Built first Android app with Firebase. Fell in love with mobile development."
+    title:  "Firebase & Cloud Development",
+    issuer: "Google",
+    date:   "Jun 2024",
+    cat:    "android",
+    badge:  "Android",
+    img:    "certs/firebase.jpg",
   },
   {
-    date:"2024",
-    title:"Data Science Journey",
-    sub:"Explored Python, Pandas, and ML algorithms. Completed multiple data projects."
+    title:  "Data Structures & Algorithms",
+    issuer: "HackerRank",
+    date:   "Aug 2024",
+    cat:    "tools",
+    badge:  "Tools",
+    img:    "certs/dsa.jpg",
   },
   {
-    date:"2025 → Now",
-    title:"Seeking Internships",
-    sub:"Actively looking for internship roles in Android and ML while building new projects."
+    title:  "Git & GitHub",
+    issuer: "GitHub",
+    date:   "Sep 2024",
+    cat:    "tools",
+    badge:  "Tools",
+    img:    "certs/git.jpg",
   },
 ];
 
@@ -135,7 +153,7 @@ const CODE_LINES = [
 ];
 
 /* ═══════════════════════════════════════════════════════
-   LOADER — won't get stuck
+   LOADER
 ═══════════════════════════════════════════════════════ */
 let animationsStarted = false;
 
@@ -145,24 +163,18 @@ function hideLoader() {
   startAnimations();
 }
 
-// Primary trigger
 window.addEventListener("load", () => {
   setTimeout(hideLoader, 1400);
 });
-
-// Safety fallback — fires if load is slow
 document.addEventListener("DOMContentLoaded", () => {
   setTimeout(hideLoader, 2500);
 });
-
-// Hard fallback — forces hide after 3s no matter what
 setTimeout(hideLoader, 3000);
 
 /* ═══════════════════════════════════════════════════════
    START ALL ANIMATIONS
 ═══════════════════════════════════════════════════════ */
 function startAnimations() {
-  // Guard — only run once
   if (animationsStarted) return;
   animationsStarted = true;
 
@@ -171,15 +183,16 @@ function startAnimations() {
   initCounters();
   buildSkills();
   buildProjects();
-  buildTimeline();
+  buildCertificates();
   initScrollEffects();
+  initSmoothNav();      // ✅ moved here so DOM is ready
   initParticles();
   initCursor();
   setFooterYear();
 }
 
 /* ═══════════════════════════════════════════════════════
-   THEME TOGGLE — runs immediately, no load needed
+   THEME TOGGLE
 ═══════════════════════════════════════════════════════ */
 (function initTheme() {
   const btn  = document.getElementById("theme-toggle");
@@ -199,7 +212,7 @@ function startAnimations() {
 })();
 
 /* ═══════════════════════════════════════════════════════
-   HAMBURGER MENU — runs immediately
+   HAMBURGER MENU
 ═══════════════════════════════════════════════════════ */
 (function initHamburger() {
   const hamburger  = document.getElementById("hamburger");
@@ -217,6 +230,81 @@ function closeMobileMenu() {
 }
 
 /* ═══════════════════════════════════════════════════════
+   SMOOTH NAV SCROLL
+   ✅ Called inside startAnimations() so DOM is fully ready
+═══════════════════════════════════════════════════════ */
+function initSmoothNav() {
+
+  // Create curtain overlay
+  const curtain = document.createElement("div");
+  curtain.id = "nav-curtain";
+  curtain.style.cssText = `
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg,
+      rgba(108,99,255,0.18),
+      rgba(0,212,255,0.12)
+    );
+    z-index: 99999;
+    pointer-events: none;
+    transform: translateY(-100%);
+    will-change: transform;
+  `;
+  document.body.appendChild(curtain);
+
+  // Scroll to a section with curtain animation
+  function smoothScrollTo(targetId) {
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    const navH      = document.getElementById("navbar")?.offsetHeight || 70;
+    const targetTop = target.getBoundingClientRect().top
+                    + window.scrollY
+                    - navH;
+
+    // 1 — slide curtain DOWN
+    curtain.style.transition =
+      "transform 0.42s cubic-bezier(0.77,0,0.18,1)";
+    curtain.style.transform  = "translateY(0%)";
+
+    setTimeout(() => {
+      // 2 — instant jump while hidden
+      window.scrollTo({ top: targetTop, behavior: "instant" });
+
+      // 3 — slide curtain UP
+      curtain.style.transition =
+        "transform 0.42s cubic-bezier(0.77,0,0.18,1)";
+      curtain.style.transform  = "translateY(100%)";
+
+      // 4 — reset silently for next use
+      setTimeout(() => {
+        curtain.style.transition = "none";
+        curtain.style.transform  = "translateY(-100%)";
+      }, 430);
+
+    }, 310);
+  }
+
+  // Attach to every internal hash link
+  document.querySelectorAll(
+    ".nav-links a, .mobile-menu a, a[href^='#'], .scroll-indicator"
+  ).forEach(link => {
+    link.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+
+      const targetId = href.slice(1);
+      if (!targetId || !document.getElementById(targetId)) return;
+
+      e.preventDefault();
+      closeMobileMenu();
+      smoothScrollTo(targetId);
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
    TYPING ROLE ANIMATION
 ═══════════════════════════════════════════════════════ */
 function initTypingRole() {
@@ -230,7 +318,7 @@ function initTypingRole() {
 
     if (deleting) {
       cIdx--;
-      el.innerHTML = word.substring(0, cIdx);
+      el.textContent = word.substring(0, cIdx);
       if (cIdx === 0) {
         deleting = false;
         rIdx = (rIdx + 1) % ROLES.length;
@@ -239,17 +327,15 @@ function initTypingRole() {
       }
     } else {
       cIdx++;
-      el.innerHTML = word.substring(0, cIdx);
+      el.textContent = word.substring(0, cIdx);
       if (cIdx === word.length) {
         deleting = true;
         setTimeout(type, 1800);
         return;
       }
     }
-
     setTimeout(type, deleting ? 60 : 100);
   }
-
   type();
 }
 
@@ -260,20 +346,18 @@ function initCodeAnimation() {
   const el = document.getElementById("code-animation");
   if (!el) return;
 
-  let lineIdx  = 0;
-  let charIdx  = 0;
+  let lineIdx   = 0;
+  let charIdx   = 0;
   let displayed = "";
 
   function typeCode() {
     if (lineIdx >= CODE_LINES.length) return;
 
     const line  = CODE_LINES[lineIdx];
-    const plain = line.replace(/<[^>]+>/g, ""); // strip tags for char count
+    const plain = line.replace(/<[^>]+>/g, "");
 
     if (charIdx <= plain.length) {
-      let visible = 0;
-      let output  = "";
-      let inTag   = false;
+      let visible = 0, output = "", inTag = false;
 
       for (let i = 0; i < line.length; i++) {
         if (line[i] === "<") inTag = true;
@@ -296,7 +380,6 @@ function initCodeAnimation() {
       setTimeout(typeCode, 80);
     }
   }
-
   typeCode();
 }
 
@@ -311,10 +394,7 @@ function initCounters() {
 
     const tick = setInterval(() => {
       current += step;
-      if (current >= target) {
-        current = target;
-        clearInterval(tick);
-      }
+      if (current >= target) { current = target; clearInterval(tick); }
       el.textContent = current;
     }, 40);
   });
@@ -334,17 +414,14 @@ function buildSkills() {
       .forEach(s => {
         const chip = document.createElement("div");
         chip.className = "skill-chip";
-
         chip.innerHTML = s.emoji
           ? `<span class="skill-icon" style="font-size:1.8rem">${s.icon}</span>
              <span>${s.name}</span>`
           : `<i class="${s.icon} skill-icon"></i>
              <span>${s.name}</span>`;
-
         grid.appendChild(chip);
       });
 
-    // Cursor hover effect
     grid.querySelectorAll(".skill-chip").forEach(el => {
       el.addEventListener("mouseenter", () =>
         document.getElementById("cursor-follower")?.classList.add("hovered"));
@@ -355,45 +432,15 @@ function buildSkills() {
 
   renderChips("all");
 
-  // Tab filtering
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".tab-btn")
+        .forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       renderChips(btn.dataset.tab);
     });
   });
 }
-
-  // Proficiency bars
-  SKILLS.forEach(s => {
-    const item = document.createElement("div");
-    item.className = "prof-item";
-    item.innerHTML = `
-      <label>
-        <span>${s.name}</span>
-        <span>${s.level}%</span>
-      </label>
-      <div class="prof-bar">
-        <div class="prof-fill" data-width="${s.level}"></div>
-      </div>`;
-    bars.appendChild(item);
-  });
-
-  // Animate bars when scrolled into view
-  const barObserver = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.querySelectorAll(".prof-fill").forEach(fill => {
-          fill.style.width = fill.dataset.width + "%";
-        });
-        barObserver.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.3 });
-
-  barObserver.observe(bars);
-
 
 /* ═══════════════════════════════════════════════════════
    BUILD PROJECTS
@@ -443,10 +490,10 @@ function buildProjects() {
 
   renderCards("all");
 
-  // Filter buttons
   document.querySelectorAll(".filter-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".filter-btn")
+        .forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       renderCards(btn.dataset.filter);
     });
@@ -454,32 +501,155 @@ function buildProjects() {
 }
 
 /* ═══════════════════════════════════════════════════════
-   BUILD TIMELINE
+   BUILD CERTIFICATES
 ═══════════════════════════════════════════════════════ */
-function buildTimeline() {
-  const container = document.getElementById("timeline-container");
-  if (!container) return;
+function buildCertificates() {
+  const grid = document.getElementById("cert-grid");
+  if (!grid) return;
 
-  TIMELINE.forEach((item, i) => {
-    const el = document.createElement("div");
-    el.className = "timeline-item";
-    el.style.transitionDelay = `${i * 0.1}s`;
-    el.innerHTML = `
-      <div class="timeline-dot"></div>
-      <div class="timeline-date">${item.date}</div>
-      <div class="timeline-title">${item.title}</div>
-      <p class="timeline-sub">${item.sub}</p>`;
-    container.appendChild(el);
+  let visibleCerts = [...CERTIFICATES];
+  let lightboxIndex = 0;
+
+  // ── Render certificate cards ───────────────────────
+  function renderCards(filter) {
+    grid.innerHTML = "";
+    visibleCerts = filter === "all"
+      ? [...CERTIFICATES]
+      : CERTIFICATES.filter(c => c.cat === filter);
+
+    if (visibleCerts.length === 0) {
+      grid.innerHTML = `
+        <div style="
+          grid-column:1/-1; text-align:center;
+          color:var(--text-muted); padding:3rem;
+          font-family:var(--font-mono); font-size:.9rem;
+        ">No certificates in this category yet.</div>`;
+      return;
+    }
+
+    visibleCerts.forEach((cert, i) => {
+      const card = document.createElement("div");
+      card.className = "cert-card";
+      card.style.transitionDelay = `${i * 0.07}s`;
+      card.dataset.index = i;
+
+      card.innerHTML = `
+        <div class="cert-img-wrap" data-index="${i}">
+          <img
+            src="${cert.img}"
+            alt="${cert.title}"
+            loading="lazy"
+            onerror="
+              this.style.display='none';
+              this.nextElementSibling.style.display='flex';
+            "
+          />
+          <div class="cert-img-placeholder" style="display:none">
+            <i class="fas fa-certificate"></i>
+            <span>No Image</span>
+          </div>
+          <div class="cert-img-overlay">
+            <i class="fas fa-search-plus"></i>
+          </div>
+        </div>
+        <div class="cert-body">
+          <div class="cert-title">${cert.title}</div>
+          <div class="cert-issuer">
+            <i class="fas fa-building"></i> ${cert.issuer}
+          </div>
+          <div class="cert-date">
+            <i class="fas fa-calendar-alt"></i> ${cert.date}
+          </div>
+          <div class="cert-footer">
+            <span class="cert-badge">${cert.badge}</span>
+            <button class="cert-view-btn" data-index="${i}">
+              View Full <i class="fas fa-expand"></i>
+            </button>
+          </div>
+        </div>`;
+
+      grid.appendChild(card);
+    });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add("visible");
+      });
+    }, { threshold: 0.1 });
+
+    grid.querySelectorAll(".cert-card").forEach(c => obs.observe(c));
+
+    // Open lightbox on click
+    grid.querySelectorAll(".cert-img-wrap, .cert-view-btn").forEach(el => {
+      el.addEventListener("click", () => {
+        openLightbox(parseInt(el.dataset.index, 10));
+      });
+    });
+  }
+
+  renderCards("all");
+
+  // Filter tabs
+  document.querySelectorAll(".cert-tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".cert-tab")
+        .forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderCards(btn.dataset.filter);
+    });
   });
 
-  // Animate items as they scroll into view
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) e.target.classList.add("visible");
-    });
-  }, { threshold: 0.2 });
+  // ── Lightbox ─────────────────────────────────────────
+  const lightbox  = document.getElementById("cert-lightbox");
+  const lbImg     = document.getElementById("lightbox-img");
+  const lbCaption = document.getElementById("lightbox-caption");
+  const lbClose   = document.getElementById("lightbox-close");
+  const lbOverlay = document.getElementById("lightbox-overlay");
+  const lbPrev    = document.getElementById("lightbox-prev");
+  const lbNext    = document.getElementById("lightbox-next");
 
-  container.querySelectorAll(".timeline-item").forEach(el => obs.observe(el));
+  if (!lightbox) return;
+
+  function openLightbox(idx) {
+    lightboxIndex    = idx;
+    const cert       = visibleCerts[idx];
+    lbImg.src        = cert.img;
+    lbImg.alt        = cert.title;
+    lbCaption.innerHTML = `
+      <strong>${cert.title}</strong>
+      ${cert.issuer} &nbsp;·&nbsp; ${cert.date}`;
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  function showPrev() {
+    lightboxIndex =
+      (lightboxIndex - 1 + visibleCerts.length) % visibleCerts.length;
+    openLightbox(lightboxIndex);
+  }
+
+  function showNext() {
+    lightboxIndex = (lightboxIndex + 1) % visibleCerts.length;
+    openLightbox(lightboxIndex);
+  }
+
+  lbClose?.addEventListener("click",   closeLightbox);
+  lbOverlay?.addEventListener("click", closeLightbox);
+  lbPrev?.addEventListener("click",    showPrev);
+  lbNext?.addEventListener("click",    showNext);
+
+  document.addEventListener("keydown", e => {
+    if (!lightbox.classList.contains("open")) return;
+    if (e.key === "Escape")     closeLightbox();
+    if (e.key === "ArrowLeft")  showPrev();
+    if (e.key === "ArrowRight") showNext();
+  });
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -489,7 +659,7 @@ function initScrollEffects() {
   const navbar  = document.getElementById("navbar");
   const backTop = document.getElementById("back-to-top");
 
-  // Reveal sections on scroll
+  // Reveal sections
   const revealObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -501,7 +671,7 @@ function initScrollEffects() {
 
   document.querySelectorAll(".reveal").forEach(el => revealObs.observe(el));
 
-  // Highlight active nav link
+  // Active nav link highlight
   const sections = document.querySelectorAll("section[id]");
   const linkObs  = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -518,7 +688,7 @@ function initScrollEffects() {
 
   sections.forEach(s => linkObs.observe(s));
 
-  // Navbar scroll style + back-to-top button
+  // Navbar + back-to-top on scroll
   window.addEventListener("scroll", () => {
     if (navbar)  navbar.classList.toggle("scrolled", window.scrollY > 50);
     if (backTop) backTop.classList.toggle("visible", window.scrollY > 400);
@@ -546,7 +716,6 @@ function initParticles() {
   resize();
 
   function Particle() { this.reset(); }
-
   Particle.prototype.reset = function () {
     this.x     = Math.random() * W;
     this.y     = Math.random() * H;
@@ -555,7 +724,6 @@ function initParticles() {
     this.vy    = (Math.random() - 0.5) * 0.4;
     this.alpha = Math.random() * 0.5 + 0.15;
   };
-
   Particle.prototype.update = function () {
     this.x += this.vx;
     this.y += this.vy;
@@ -570,7 +738,6 @@ function initParticles() {
     const isDark = document.documentElement.dataset.theme !== "light";
     const col    = isDark ? "108,99,255" : "80,70,200";
 
-    // Draw dots
     particles.forEach(p => {
       p.update();
       ctx.beginPath();
@@ -579,7 +746,6 @@ function initParticles() {
       ctx.fill();
     });
 
-    // Connect nearby particles with lines
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
@@ -597,7 +763,6 @@ function initParticles() {
     }
     requestAnimationFrame(draw);
   }
-
   draw();
 }
 
@@ -627,9 +792,8 @@ function initCursor() {
     requestAnimationFrame(animFollower);
   })();
 
-  // Expand follower on hoverable elements
   document.querySelectorAll(
-    "a, button, .skill-chip, .project-card, .contact-card, .tab-btn, .filter-btn"
+    "a, button, .skill-chip, .project-card, .contact-card, .tab-btn, .filter-btn, .cert-card"
   ).forEach(el => {
     el.addEventListener("mouseenter", () =>
       follower.classList.add("hovered"));
@@ -656,18 +820,17 @@ function initCursor() {
     const errMail = document.getElementById("err-email");
     const errMsg  = document.getElementById("err-msg");
 
-    // Clear previous errors
-    [errName, errMail, errMsg].forEach(el => { if (el) el.textContent = ""; });
+    [errName, errMail, errMsg].forEach(el => {
+      if (el) el.textContent = "";
+    });
     [name, email, message].forEach(el => el?.classList.remove("error"));
 
-    // Validate name
     if (!name?.value.trim()) {
       if (errName) errName.textContent = "Name is required.";
       name?.classList.add("error");
       valid = false;
     }
 
-    // Validate email
     const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailReg.test(email?.value || "")) {
       if (errMail) errMail.textContent = "Enter a valid email address.";
@@ -675,7 +838,6 @@ function initCursor() {
       valid = false;
     }
 
-    // Validate message
     if (!message?.value.trim()) {
       if (errMsg) errMsg.textContent = "Message cannot be empty.";
       message?.classList.add("error");
@@ -684,14 +846,12 @@ function initCursor() {
 
     if (!valid) return;
 
-    // Show loading state
     const btn = document.getElementById("submit-btn");
     if (btn) {
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
       btn.disabled  = true;
     }
 
-    // Simulate sending — replace with EmailJS / Formspree for real emails
     setTimeout(() => {
       if (btn) {
         btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
@@ -714,69 +874,3 @@ function setFooterYear() {
   const el = document.getElementById("footer-year");
   if (el) el.textContent = `© ${new Date().getFullYear()}`;
 }
-/* ═══════════════════════════════════════════════════════
-   SMOOTH NAV SCROLL WITH TRANSITION OVERLAY
-═══════════════════════════════════════════════════════ */
-(function initSmoothNav() {
-
-  // ── Create overlay element ──────────────────────────
-  const overlay = document.createElement("div");
-  overlay.id = "nav-transition";
-  overlay.style.cssText = `
-    position: fixed;
-    inset: 0;
-    background: var(--accent);
-    z-index: 99999;
-    pointer-events: none;
-    clip-path: circle(0% at 50% 50%);
-    transition: clip-path 0.55s cubic-bezier(0.77,0,0.18,1);
-    opacity: 0.15;
-  `;
-  document.body.appendChild(overlay);
-
-  // ── Helper: animate scroll to target ───────────────
-  function smoothScrollTo(targetId) {
-    const target = document.getElementById(targetId);
-    if (!target) return;
-
-    const navHeight = document.getElementById("navbar")?.offsetHeight || 70;
-    const targetTop = target.getBoundingClientRect().top
-                    + window.scrollY
-                    - navHeight;
-
-    // Step 1 — flash overlay in
-    overlay.style.clipPath = "circle(150% at 50% 50%)";
-
-    setTimeout(() => {
-      // Step 2 — jump scroll (hidden behind overlay)
-      window.scrollTo({ top: targetTop, behavior: "instant" });
-
-      // Step 3 — fade overlay out
-      setTimeout(() => {
-        overlay.style.clipPath = "circle(0% at 50% 50%)";
-      }, 180);
-
-    }, 300);
-  }
-
-  // ── Attach to ALL nav links (desktop + mobile) ──────
-  document.querySelectorAll(
-    ".nav-links a, .mobile-menu a, .scroll-indicator, a[href^='#']"
-  ).forEach(link => {
-
-    link.addEventListener("click", function (e) {
-      const href = this.getAttribute("href");
-
-      // Only handle internal hash links
-      if (!href || !href.startsWith("#")) return;
-
-      const targetId = href.slice(1);
-      if (!targetId || !document.getElementById(targetId)) return;
-
-      e.preventDefault();
-      closeMobileMenu();
-      smoothScrollTo(targetId);
-    });
-  });
-
-})();
