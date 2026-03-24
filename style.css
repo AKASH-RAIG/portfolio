@@ -1005,3 +1005,37 @@ footer strong { color: var(--accent); }
   object-position: center 20%; /* 🔥 adjust face */
   border-radius: 50%;
 }
+/* IMAGE MODAL */
+#image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+#image-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+#modal-img {
+  max-width: 90%;
+  max-height: 85%;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+#close-modal {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+  color: white;
+  cursor: pointer;
+}

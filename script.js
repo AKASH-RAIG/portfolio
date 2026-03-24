@@ -874,3 +874,29 @@ function setFooterYear() {
   const el = document.getElementById("footer-year");
   if (el) el.textContent = `© ${new Date().getFullYear()}`;
 }
+// IMAGE MODAL FUNCTIONALITY
+// IMAGE MODAL FIXED VERSION
+window.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("image-modal");
+  const modalImg = document.getElementById("modal-img");
+  const closeBtn = document.getElementById("close-modal");
+
+  const images = document.querySelectorAll(".certificate-img img");
+
+  images.forEach(img => {
+    img.addEventListener("click", () => {
+      modal.classList.add("active");
+      modalImg.src = img.src;
+    });
+  });
+
+  // Close button
+  closeBtn.onclick = () => modal.classList.remove("active");
+
+  // Click outside image
+  modal.onclick = (e) => {
+    if (e.target === modal) {
+      modal.classList.remove("active");
+    }
+  };
+});
