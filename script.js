@@ -325,10 +325,8 @@ function initCounters() {
 ═══════════════════════════════════════════════════════ */
 function buildSkills() {
   const grid = document.getElementById("skills-grid");
-  const bars = document.getElementById("proficiency-bars");
-  if (!grid || !bars) return;
+  if (!grid) return;
 
-  // Render skill chips based on filter
   function renderChips(filter) {
     grid.innerHTML = "";
     SKILLS
@@ -336,15 +334,17 @@ function buildSkills() {
       .forEach(s => {
         const chip = document.createElement("div");
         chip.className = "skill-chip";
+
         chip.innerHTML = s.emoji
           ? `<span class="skill-icon" style="font-size:1.8rem">${s.icon}</span>
              <span>${s.name}</span>`
           : `<i class="${s.icon} skill-icon"></i>
              <span>${s.name}</span>`;
+
         grid.appendChild(chip);
       });
 
-    // Re-attach cursor hover listeners
+    // Cursor hover effect
     grid.querySelectorAll(".skill-chip").forEach(el => {
       el.addEventListener("mouseenter", () =>
         document.getElementById("cursor-follower")?.classList.add("hovered"));
@@ -355,7 +355,7 @@ function buildSkills() {
 
   renderChips("all");
 
-  // Tab buttons
+  // Tab filtering
   document.querySelectorAll(".tab-btn").forEach(btn => {
     btn.addEventListener("click", () => {
       document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
@@ -363,6 +363,7 @@ function buildSkills() {
       renderChips(btn.dataset.tab);
     });
   });
+}
 
   // Proficiency bars
   SKILLS.forEach(s => {
@@ -392,7 +393,7 @@ function buildSkills() {
   }, { threshold: 0.3 });
 
   barObserver.observe(bars);
-}
+
 
 /* ═══════════════════════════════════════════════════════
    BUILD PROJECTS

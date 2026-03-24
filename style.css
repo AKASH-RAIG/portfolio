@@ -953,3 +953,24 @@ footer strong { color: var(--accent); }
   .projects-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: repeat(3, 1fr); }
 }
+/* ═══════════════════════════════════════════════════════
+   CERTIFICATES
+═══════════════════════════════════════════════════════ */
+
+.certificate-img {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.certificate-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+
+.project-card:hover .certificate-img img {
+  transform: scale(1.05);
+}

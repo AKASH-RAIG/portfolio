@@ -1,8 +1,4 @@
-<!-- <script>
-  if (!localStorage.getItem("visited")) {
-    window.location.replace("intro.html");
-  }
-</script> -->
+
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -40,7 +36,7 @@
       <li><a href="#about"    data-section="about">About</a></li>
       <li><a href="#skills"   data-section="skills">Skills</a></li>
       <li><a href="#projects" data-section="projects">Projects</a></li>
-      <li><a href="#timeline" data-section="timeline">Journey</a></li>
+      <li><a href="#certificates" data-section="certificates">Certificates</a></li>
       <li><a href="#contact"  data-section="contact">Contact</a></li>
     </ul>
     <div class="nav-right">
@@ -222,7 +218,7 @@
 
     <div class="skills-grid" id="skills-grid"></div>
 
-    <div class="proficiency-bars" id="proficiency-bars"></div> 
+    <!-- <div class="proficiency-bars" id="proficiency-bars"></div>  -->
   </section>
 
   <!-- ── PROJECTS ───────────────────────────────────────── -->
@@ -243,13 +239,61 @@
   </section>
 
   <!-- ── TIMELINE ───────────────────────────────────────── -->
-  <section id="timeline" class="reveal">
-    <div class="section-header">
-      <span class="section-tag">// my journey</span>
-      <h2>Learning <span class="highlight">Timeline</span></h2>
+  <!-- ── CERTIFICATES ───────────────────────────────────────── -->
+<section id="certificates" class="reveal">
+  <div class="section-header">
+    <span class="section-tag">// credentials</span>
+    <h2>My <span class="highlight">Certificates</span></h2>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Certificate 1 -->
+    <div class="project-card">
+      <div class="certificate-img">
+        <img src="images/cert1.jpg" alt="Certificate 1">
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">Software Engineering: Implementation and Testing</h3>
+        <p class="project-desc">Coursera · May 2024</p>
+      </div>
     </div>
-    <div class="timeline" id="timeline-container"></div>
-  </section>
+
+    <!-- Certificate 2 -->
+    <div class="project-card">
+      <div class="certificate-img">
+        <img src="images/cert2.jpg" alt="Certificate 2">
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">Cloud Computing</h3>
+        <p class="project-desc">NPTEL · Oct 2025</p>
+      </div>
+    </div>
+
+    <!-- Certificate 3 -->
+    <div class="project-card">
+      <div class="certificate-img">
+        <img src="images/cert3.jpg" alt="Certificate 3">
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">Android App Development</h3>
+        <p class="project-desc">W3Grads · Aug 2025</p>
+      </div>
+    </div>
+
+    <!-- Certificate 4 -->
+    <div class="project-card">
+      <div class="certificate-img">
+        <img src="images/cert4.jpg" alt="Certificate 4">
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">The Bits and Bytes</h3>
+        <p class="project-desc">Coursera · Sep 2024</p>
+      </div>
+    </div>
+
+  </div>
+</section>
 
   <!-- ── CONTACT ────────────────────────────────────────── -->
   <section id="contact" class="reveal">
