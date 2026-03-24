@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akash Kumar Rai | Enter</title>
+  <link rel="stylesheet" href="intro.css"/>
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- ── PARTICLES BEHIND EVERYTHING ────────────────── -->
+  <canvas id="intro-particles"></canvas>
+
+  <!-- ── LOCK SCENE ──────────────────────────────────── -->
+  <div class="lock-scene" id="lock-scene">
+
+    <!-- Background watermark text -->
+    <div class="bg-text">PORTFOLIO</div>
+
+    <!-- Title -->
+    <div class="intro-title">
+      <span class="bracket">&lt;</span>
+      Akash Kumar Rai
+      <span class="bracket">/&gt;</span>
+    </div>
+    <p class="intro-sub">Drag the key into the lock to enter</p>
+
+    <!-- Lock -->
+    <div class="lock-wrap" id="lock-wrap">
+      <div class="lock" id="lock">
+        <div class="lock-shackle" id="lock-shackle"></div>
+        <div class="lock-body">
+          <div class="keyhole" id="keyhole">
+            <div class="keyhole-circle"></div>
+            <div class="keyhole-slot"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Hint rings around lock -->
+      <div class="lock-ring ring-1"></div>
+      <div class="lock-ring ring-2"></div>
+    </div>
+
+    <!-- Key — draggable -->
+    <div class="key-wrap" id="key-wrap">
+      <div class="key" id="key">
+        <div class="key-head">
+          <div class="key-hole"></div>
+        </div>
+        <div class="key-shaft">
+          <div class="key-tooth t1"></div>
+          <div class="key-tooth t2"></div>
+          <div class="key-tooth t3"></div>
+        </div>
+      </div>
+      <p class="key-label">Drag Me</p>
+    </div>
+
+    <!-- Mobile tap button fallback -->
+    <button class="tap-btn" id="tap-btn">
+      <i class="fas fa-unlock-alt"></i> Tap to Enter
+    </button>
+
+  </div>
+
+  <!-- ── COMPUTER TERMINAL ────────────────────────────── -->
+  <div class="computer-wrap" id="computer-wrap">
+
+    <!-- Monitor -->
+    <div class="monitor">
+      <div class="monitor-screen">
+
+        <!-- Screen glare overlay -->
+        <div class="screen-glare"></div>
+
+        <!-- Terminal -->
+        <div class="terminal" id="terminal">
+          <div class="terminal-header">
+            <span class="t-dot red"></span>
+            <span class="t-dot yellow"></span>
+            <span class="t-dot green"></span>
+            <span class="t-title">akash@portfolio:~</span>
+          </div>
+          <div class="terminal-body" id="terminal-body">
+            <div class="t-line">
+              <span class="t-prompt">$</span>
+              <span class="t-text">Welcome to Akash's Portfolio v1.0</span>
+            </div>
+            <div class="t-line">
+              <span class="t-prompt">$</span>
+              <span class="t-text hint-text">Type the magic command...(cout<<"key";)</span>
+            </div>
+            <div class="t-line t-spacer"></div>
+            <div class="t-output" id="t-output"></div>
+            <div class="t-input-line">
+              <span class="t-prompt">&gt;&gt;</span>
+              <span class="t-typed" id="t-typed"></span>
+              <span class="t-cursor">█</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Monitor bottom bezel -->
+      <div class="monitor-bezel">
+        <div class="monitor-logo">AKR</div>
+      </div>
+    </div>
+
+    <!-- Monitor stand -->
+    <div class="monitor-neck"></div>
+    <div class="monitor-base"></div>
+
+    <!-- Decorative keyboard -->
+    <div class="keyboard">
+      <div class="kb-row">
+        <div class="kb-key wide">Tab</div>
+        <div class="kb-key">Q</div>
+        <div class="kb-key">W</div>
+        <div class="kb-key">E</div>
+        <div class="kb-key">R</div>
+        <div class="kb-key">T</div>
+        <div class="kb-key">Y</div>
+        <div class="kb-key">U</div>
+        <div class="kb-key">I</div>
+        <div class="kb-key">O</div>
+        <div class="kb-key">P</div>
+      </div>
+      <div class="kb-row">
+        <div class="kb-key wide2">Caps</div>
+        <div class="kb-key">A</div>
+        <div class="kb-key">S</div>
+        <div class="kb-key">D</div>
+        <div class="kb-key">F</div>
+        <div class="kb-key">G</div>
+        <div class="kb-key">H</div>
+        <div class="kb-key">J</div>
+        <div class="kb-key">K</div>
+        <div class="kb-key">L</div>
+        <div class="kb-key wide2">Enter</div>
+      </div>
+      <div class="kb-row">
+        <div class="kb-key wide3">Shift</div>
+        <div class="kb-key">Z</div>
+        <div class="kb-key">X</div>
+        <div class="kb-key">C</div>
+        <div class="kb-key">V</div>
+        <div class="kb-key">B</div>
+        <div class="kb-key">N</div>
+        <div class="kb-key">M</div>
+        <div class="kb-key wide3">Shift</div>
+      </div>
+      <div class="kb-row">
+        <div class="kb-key space">Space</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── HINT BADGE ────────────────────────────────────── -->
+  <div class="hint-badge" id="hint-badge">
+    <i class="fas fa-keyboard"></i>
+    Type on your keyboard
+  </div>
+
+  <!-- ── DOORS (shown during unlock animation) ───────── -->
+  <div class="doors" id="doors">
+    <div class="door door-left">
+      <div class="door-wood">
+        <div class="door-panel top-left"></div>
+        <div class="door-panel bottom-left"></div>
+        <div class="door-strip"></div>
+        <div class="door-handle left-handle">
+          <div class="handle-bar"></div>
+        </div>
+      </div>
+      <div class="door-shine"></div>
+    </div>
+    <div class="door door-right">
+      <div class="door-wood">
+        <div class="door-panel top-right"></div>
+        <div class="door-panel bottom-right"></div>
+        <div class="door-strip"></div>
+        <div class="door-handle right-handle">
+          <div class="handle-bar"></div>
+        </div>
+      </div>
+      <div class="door-shine"></div>
+    </div>
+  </div>
+
+  <script src="intro.js"></script>
+  <script>
+   const key = document.getElementById("key");
+
+key.addEventListener("click", () => {
+  localStorage.setItem("visited", "true");
+
+  setTimeout(() => {
+    window.location.replace("index.html");
+  }, 1200);
+});
+</script>
+</body>
+</html>

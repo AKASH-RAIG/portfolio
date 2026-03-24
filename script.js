@@ -18,8 +18,8 @@ const SKILLS = [
 
 const PROJECTS = [
   {
-    title:"ChatApp — Firebase",
-    desc:"Real-time Android chat app with Firebase Auth, Firestore & push notifications. Supports media sharing and group chats.",
+    title:"CareBridge — Firebase",
+    desc:"Real-time Android chat app with Firebase Auth, Firestore & push notifications. Supports media sharing and contact with doctor with sos button",
     icon:"fab fa-android",
     tags:["Java","Firebase","Android"],
     cat:"android",
@@ -28,14 +28,15 @@ const PROJECTS = [
     featured:true
   },
   {
-    title:"Student Tracker",
-    desc:"Android app to track attendance and grades using SQLite. Includes charts and CSV export functionality.",
-    icon:"fas fa-graduation-cap",
-    tags:["Java","SQLite","Android"],
-    cat:"android",
-    github:"https://github.com/akashrairai",
-    demo:"",
-    featured:false
+  title: "Loan Approval Prediction",
+  desc: "Machine learning model achieving 88.7% accuracy...",
+  icon: "fas fa-brain",
+  tags: ["Python", "Scikit-learn", "Matplotlib"],
+  cat: "python",
+  github:"https://github.com/akashrairai",
+  demo:"",
+  featured:false
+
   },
   {
     title:"Portfolio Website",
@@ -58,14 +59,13 @@ const PROJECTS = [
     featured:false
   },
   {
-    title:"Weather Dashboard",
-    desc:"Fetches real-time weather via OpenWeatherMap API and displays it in a clean Android UI with forecasts.",
-    icon:"fas fa-cloud-sun",
-    tags:["Java","REST API","Android"],
-    cat:"android",
-    github:"https://github.com/akashrairai",
-    demo:"",
-    featured:false
+  title: "Power BI Dashboard",
+  desc: "Interactive dashboard analyzing MSME loan data...",
+  icon: "fas fa-chart-line",
+  tags: ["Power BI", "DAX", "Excel"],
+  cat: "data",
+  demo:"",
+  featured:false
   },
   {
     title:"ML Spam Detector",
